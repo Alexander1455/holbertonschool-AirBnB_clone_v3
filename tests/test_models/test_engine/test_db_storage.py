@@ -67,6 +67,23 @@ test_db_storage.py'])
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
 
+    def test_dbstorage_get_count():
+        storage = DBStorage()
+        # Assuming you have objects of various classes already added to the database
+
+        # Test get method
+        user_obj = storage.get(User, 'user_id')
+        assert user_obj is not None
+        assert user_obj.id == 'user_id'
+
+        # Test count method
+        user_count = storage.count(User)
+        assert user_count > 0
+
+        # Test count method without specifying a class (count all objects)
+        total_count = storage.count()
+        assert total_count > 0
+
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
